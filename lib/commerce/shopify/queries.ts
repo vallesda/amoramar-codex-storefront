@@ -41,10 +41,60 @@ export const COLLECTIONS = `query Collections($after: String) @inContext(country
     pageInfo { hasNextPage endCursor }
   }
 }`;
-export const CART_CREATE = `mutation CartCreate($input: CartInput!) @inContext(country: MX, language: ES) {
+export const CART_FIELDS = `
+fragment CartFields on Cart {
+  id checkoutUrl totalQuantity
+  lines(first: 100) {
+    nodes { id quantity merchandise { ... on ProductVariant { id } } }
+    pageInfo { hasNextPage }
+  }
+}`;
+export const CART = `${CART_FIELDS}
+query Cart($id: ID!) @inContext(country: MX, language: ES) {
+  cart(id: $id) { ...CartFields }
+}`;
+export const CART_CREATE = `${CART_FIELDS}
+mutation CartCreate($input: CartInput!) @inContext(country: MX, language: ES) {
   cartCreate(input: $input) {
-    cart { checkoutUrl totalQuantity }
+    cart { ...CartFields }
     userErrors { field message code }
     warnings { code message }
   }
+}`;
+export const CART_LINES_ADD = `${CART_FIELDS}
+mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) @inContext(country: MX, language: ES) {
+  cartLinesAdd(cartId: $cartId, lines: $lines) {
+    cart { ...CartFields }
+    userErrors { field message code }
+    warnings { code message }
+  }
+}`;
+export const CART_LINES_UPDATE = `${CART_FIELDS}
+mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) @inContext(country: MX, language: ES) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
+    cart { ...CartFields }
+    userErrors { field message code }
+    warnings { code message }
+  }
+}`;
+export const CART_LINES_REMOVE = `${CART_FIELDS}
+mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) @inContext(country: MX, language: ES) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+    cart { ...CartFields }
+    userErrors { field message code }
+    warnings { code message }
+  }
+}`;
+export const CONNECTION_CHECK = `
+query ConnectionCheck @inContext(country: MX, language: ES) {
+  shop { name }
+  localization { country { isoCode currency { isoCode } } }
+  products(first: 1) {
+    nodes {
+      id handle
+      variants(first: 1) { nodes { id availableForSale quantityAvailable price { currencyCode } } }
+      metafield(namespace: "amoramar", key: "origin") { value }
+    }
+  }
+  collections(first: 1) { nodes { handle } }
 }`;

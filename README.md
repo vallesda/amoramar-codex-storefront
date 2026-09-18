@@ -17,9 +17,14 @@ Configura un dominio `*.myshopify.com` y un **token público de Storefront API**
 
 ## Estado
 
-Implementado: copia del diseño y recursos, catálogo/colecciones/ficha vía Storefront GraphQL 2026-07, adaptación de precios MXN, variantes en carrito, creación de carrito Shopify y redirección al checkout alojado. El carrito local es una selección provisional; se crea un carrito Shopify al continuar al pago. No se sincroniza todavía con Shopify en cada cambio ni se limpia automáticamente al completar el pago.
+Implementado: copia del diseño y recursos, catálogo/colecciones/ficha vía Storefront GraphQL 2026-07, adaptación de precios MXN, variantes en carrito, creación de carrito Shopify y redirección al checkout alojado. El carrito local es una selección provisional; se crea un carrito Shopify al continuar al pago. El ID completo del carrito Shopify queda en una cookie HttpOnly. Cada intento de checkout reutiliza el carrito y sincroniza la selección local mediante altas, cambios y bajas. No se sincroniza todavía con Shopify en cada clic ni se limpia automáticamente al completar el pago.
 
 No habilitado: paquetes antiguos, calendario de encargos, cobertura propia, consulta de pedidos heredados, Customer Account API, webhooks, sincronización del admin anterior. Ver [plan de refactor](docs/PLAN-REFACTOR-SHOPIFY.md).
+
+## Conectar Shopify (fase 2)
+
+Completa `.env.local` y ejecuta `npm run shopify:check` con Node 22.18+.
+Comprueba token, versión de API, mercado México/MXN, publicación del catálogo y lectura de inventario sin crear carritos ni pedidos. No imprime credenciales. Consulta [la guía de conexión](docs/CONECTAR-SHOPIFY.md).
 
 ## Validación
 

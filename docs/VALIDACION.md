@@ -16,3 +16,11 @@
 Sin dominio/token de la tienda real, no se verificaron publicaciones, precios, inventario, envíos, impuestos, pago ni pedido de extremo a extremo. La validación del esquema no demuestra que la tienda tenga los permisos o configuración necesarios. No se desplegó en Vercel ni se modificó la tienda original.
 
 Las pruebas del checkout del proveedor anterior y de su cliente REST no se trasladaron: ese flujo se reemplazó. `PRUEBAS.md` se conserva como referencia histórica, no como evidencia de esta implementación.
+
+## Avance de integración · rama codex/shopify-integration
+
+- TypeScript y ESLint: correctos.
+- 71 pruebas correctas en 13 archivos. Cobertura añadida: token y dominio válidos, códigos 401/403/429, discrepancias de versión, errores GraphQL parciales, cookie de carrito, reutilización, expiración, variantes y cantidades, sincronización de líneas y ausencia de reintentos automáticos ante timeout.
+- 6 operaciones de carrito/conexión validadas con el esquema oficial 2026-07.
+- Build de producción con Webpack: correcto.
+- `npm run shopify:check`: fallo esperado por falta de dominio/token reales. No se realizó una compra ni se modificó una tienda Shopify.
