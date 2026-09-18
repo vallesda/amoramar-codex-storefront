@@ -82,6 +82,10 @@ Vercel: Next.js, Node 22.x, lockfile y `npm ci`, build estándar. Variables deta
 
 Dominio y token Storefront ya configurados localmente. Sigue pendiente revisar publicaciones, metafields y configuración de entrega antes del lanzamiento. No pegar secretos en el plan. Confirmar paquetes, encargos, política de peso/precio, métodos de entrega y si el admin anterior seguirá operando. El plugin Shopify para gestionar la tienda se ofreció pero su conexión no está confirmada; es independiente del Dev MCP público y del token que utiliza la aplicación.
 
+## Navegación principal
+
+El navbar de escritorio y móvil muestra únicamente Catálogo, Fresco y Congelado. Las demás categorías siguen accesibles desde el catálogo. Congelado enlaza a la colección `congelados`; Fresco espera una colección publicada con handle `fresco`, `frescos` o `producto-fresco`. Mientras falta, `/search/fresco` presenta un estado vacío sin asignar productos automáticamente. Las páginas informativas siguen en el pie de página.
+
 ## Hallazgos del catálogo real
 
 - El canal publica productos auxiliares como `store-pickup-app` y `zona-de-envio`; revisar su publicación para el nuevo storefront antes del lanzamiento. No se cambiaron datos de Shopify.

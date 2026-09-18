@@ -36,7 +36,11 @@ type Props = { params: Promise<{ collection: string }> };
  */
 async function resolve(handle: string) {
   const collections = await getCollections();
-  return collections.find((c) => c.handle === handle);
+  const collection = collections.find((c) => c.handle === handle);
+  // Keep the primary Fresco destination usable until its collection is published.
+  return collection ?? (handle === 'fresco'
+    ? { handle, title: 'Fresco', showInNav: false }
+    : undefined);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -47,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${found.title} en ${LOCALITY}`,
-    description: `${found.title} frescos en ${LOCALITY}, ${REGION}. Selección del día en Amor a Mar, con entrega a domicilio en la zona metropolitana de Monterrey.`,
+    description: `${found.title} en ${LOCALITY}, ${REGION}. Selección del día en Amor a Mar, con entrega a domicilio en la zona metropolitana de Monterrey.`,
     alternates: { canonical: `/search/${handle}` },
   };
 }

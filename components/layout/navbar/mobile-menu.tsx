@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import IconButton from '@/components/ui/icon-button';
-import type { Collection } from '@/lib/commerce/types';
-import { INFO_LINKS } from '@/components/layout/nav-links';
+import type { NavLink } from '@/components/layout/nav-links';
 
 /**
  * Mobile navigation.
@@ -16,10 +15,10 @@ import { INFO_LINKS } from '@/components/layout/nav-links';
  * the two are laid out separately, as the brief asks.
  */
 export default function MobileMenu({
-  collections,
+  links,
   brand,
 }: {
-  collections: Collection[];
+  links: NavLink[];
   /**
    * El logotipo, ya renderizado por el navbar.
    *
@@ -79,53 +78,14 @@ export default function MobileMenu({
             </IconButton>
           </div>
 
-          {/*
-            Sin buscador.
-
-            Estaba duplicado: la barra superior ya lleva el suyo y sigue visible
-            con el cajón abierto. Dos campos que buscan lo mismo en la misma
-            pantalla no dan dos caminos, dan una duda — y aquí además empujaba
-            las categorías hacia abajo, que es lo que el cajón existe para
-            enseñar.
-          */}
-
-          {/* Ruled rows rather than a gapped list: at 18px with no separator
-              the entries read as a paragraph of links, and the row a thumb is
-              aiming at has no visible bounds. */}
           <nav className="flex-1 overflow-y-auto px-5 py-2">
             <ul className="flex flex-col">
-              <li className="border-b border-border">
-                <Link
-                  href="/search"
-                  onClick={() => setOpen(false)}
-                  className="block py-4 text-lg transition-colors hover:text-brand"
-                >
-                  Todo el catálogo
-                </Link>
-              </li>
-              {collections.map((collection) => (
-                <li key={collection.handle} className="border-b border-border">
-                  <Link
-                    href={`/search/${collection.handle}`}
-                    onClick={() => setOpen(false)}
-                    className="block py-4 text-lg transition-colors hover:text-brand"
-                  >
-                    {collection.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* The shop's own pages, set smaller and muted — the same split the
-                desktop header makes. A shopper is never looking for a category
-                and an explainer in the same moment. */}
-            <ul className="mt-2 flex flex-col">
-              {INFO_LINKS.map((link) => (
-                <li key={link.href} className="border-b border-border last:border-none">
+              {links.map((link) => (
+                <li key={link.href} className="border-b border-border">
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-3.5 text-base text-muted transition-colors hover:text-brand"
+                    className="block py-4 text-lg transition-colors hover:text-brand"
                   >
                     {link.label}
                   </Link>
