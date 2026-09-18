@@ -1,19 +1,19 @@
-/**
- * The informational pages, in one list.
- *
- * The navbar, the mobile drawer and the footer all need them, and three copies
- * of the same four entries drift the first time one is renamed — which is
- * exactly what happened to the collection list before it was read from the
- * catalogue.
- *
- * They are deliberately separate from the catalogue links. A category answers
- * "what do you sell"; these answer "how does this work" and "who are you", and
- * a shopper is never looking for both at the same moment.
- *
- * El orden va de quiénes somos a cómo se compra y termina en las dudas
- * sueltas: quien llega a este grupo suele estar decidiendo si confía en la
- * pescadería antes de mirar la mecánica del pedido.
- */
+import type { Collection } from '@/lib/commerce/types';
+
+export type NavLink = { href: string; label: string };
+
+export function getPrimaryLinks(collections: Collection[]): NavLink[] {
+  const fresh = collections.find(c => /^(fresco|frescos|producto-fresco)$/.test(c.handle));
+  const frozen = collections.find(c => /^(congelado|congelados|producto-congelado)$/.test(c.handle));
+  return [
+    { href: '/search', label: 'Catálogo' },
+    { href: `/search/${fresh?.handle ?? 'fresco'}`, label: 'Fresco' },
+    { href: `/search/${frozen?.handle ?? 'congelados'}`, label: 'Congelado' },
+    ...INFO_LINKS,
+  ];
+}
+
+/** Shared informational destinations for the navbar and footer. */
 export const INFO_LINKS = [
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/como-funciona', label: 'Cómo funciona' },
@@ -34,3 +34,12 @@ export {
   WHATSAPP_URL,
   WHATSAPP_LABEL,
 } from '@/lib/shop';
+
+/** Curated footer only; the full catalog keeps all published collections. */
+export const FOOTER_PRODUCT_LINKS = [
+  { href: '/search', label: 'Todo el catálogo' },
+  { href: '/search/salsas-y-aderezos', label: 'Salsas y Aderezos' },
+  { href: '/search/congelados', label: 'Congelados' },
+  { href: '/search/pescado', label: 'Filetes' },
+  { href: '/search/fresco', label: 'Frescos' },
+] as const;

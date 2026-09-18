@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "shopify:check": "node --experimental-strip-types --env-file-if-exists=.env.local scripts/check-shopify.mjs"
   },
   "dependencies": {
     "next": "^16.3.5",

@@ -13,21 +13,8 @@ import SpecList, { type Spec } from '@/components/ui/spec-list';
 /**
  * Seasonal merchandising — the single green moment in the middle of the page.
  *
- * ## Qué pieza sale, y por qué es una bandera propia
- *
- * La que el admin marque como **pesca de la semana** (`featuredItem`), y
- * ninguna otra. Antes se elegía «la primera marcada como de temporada, o si no
- * la primera destacada», y esa cadena tenía dos problemas: elegía sola —quien
- * marcaba un segundo producto de temporada no cambiaba la portada y no sabía
- * por qué— y compartía bandera con «Más vendidos», así que la misma pieza
- * podía encabezar la página dos veces.
- *
- * Con una bandera exclusiva —la base impide que haya dos— la portada la decide
- * el mostrador y se ve en el mismo sitio donde se marca.
- *
- * Sin ninguna marcada la sección no se dibuja. Una «Pesca de la semana» vacía
- * es peor que no tenerla, y elegir una pieza por su cuenta sería inventar una
- * decisión que no es del código.
+ * Uses the first product in the published Más vendidos collection,
+ * in the same order as its catalog page. An empty collection hides the band.
  *
  * The band now names itself before it names the fish. Previously the section
  * heading *was* the product name, which meant the page's largest type said
@@ -68,8 +55,8 @@ import SpecList, { type Spec } from '@/components/ui/spec-list';
  * sin él; con un hueco de imagen rota, no.
  */
 export default async function CatchOfTheWeek() {
-  const { items } = await getProducts();
-  const product = items.find((p) => p.featuredItem) ?? null;
+  const { items } = await getProducts({ collection: 'mas-vendidos' });
+  const product = items[0] ?? null;
 
   if (!product) return null;
 
@@ -109,7 +96,7 @@ export default async function CatchOfTheWeek() {
                 La pesca de la <em className="text-sun">semana</em>
               </>
             }
-            lede="Una pieza que elegimos esta semana y que no siempre vamos a tener."
+            lede="Descubre una de las favoritas de nuestra selección."
             className="mb-12 md:mb-16"
           />
 

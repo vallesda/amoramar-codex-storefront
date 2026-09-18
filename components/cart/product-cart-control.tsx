@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { Product } from '@/lib/commerce/types';
 import Button from '@/components/ui/button';
 import Stepper from '@/components/ui/stepper';
@@ -51,6 +52,7 @@ export default function ProductCartControl({
   className?: string;
 }) {
   const { add, setQuantity, quantityOf } = useCart();
+  const [confirmed, setConfirmed] = useState(false);
   const quantity = quantityOf(product.merchandiseId ?? product.id);
 
   if (!product.availableForSale) {
@@ -74,7 +76,7 @@ export default function ProductCartControl({
         <Button
           variant="addOutline"
           fullWidth
-          onClick={() => add(product, 1)}
+          onClick={() => { add(product, 1); setConfirmed(true); }}
           className={className}
         >
           Agregar
@@ -100,8 +102,7 @@ export default function ProductCartControl({
     <>
       <Stepper
         value={quantity}
-        // The stock ceiling, so the grid cannot build a cart the checkout will
-        // reject when it reserves under a row lock.
+        // UI quantity cap. Shopify validates actual availability at checkout.
         max={product.available}
         // One more press below 1 removes the line and returns this slot to
         // "Agregar". Without it the shopper can add from the grid but has to go
@@ -111,7 +112,7 @@ export default function ProductCartControl({
         fullWidth
         label={product.name}
         onChange={(next) => setQuantity(product.merchandiseId ?? product.id, next)}
-        className={className}
+        className={`${className} ${confirmed ? 'cart-added-feedback' : ''}`}
       />
 
       <div aria-live="polite" aria-atomic="true" className="sr-only">

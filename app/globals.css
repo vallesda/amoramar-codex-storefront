@@ -409,3 +409,19 @@
     transition-duration: 120ms !important;
   }
 }
+
+/* Brief confirmation without changing the control's dimensions or focus. */
+@keyframes cart-count-confirm {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@keyframes cart-added-confirm {
+  0% { background-color: #f3df87; }
+  100% { background-color: transparent; }
+}
+.cart-count-feedback { animation: cart-count-confirm 280ms ease-out; }
+.cart-added-feedback { animation: cart-added-confirm 700ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .cart-count-feedback, .cart-added-feedback { animation: none !important; }
+}

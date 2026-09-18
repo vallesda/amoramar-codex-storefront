@@ -6,7 +6,7 @@ export type ShopifyProduct = {
   seo: { title: string | null; description: string | null };
   featuredImage: { url: string; altText: string | null } | null;
   images: { nodes: { url: string; altText: string | null }[] };
-  variants: { nodes: { id: string; title: string; availableForSale: boolean; quantityAvailable: number | null; price: { amount: string; currencyCode: string } }[]; pageInfo: { hasNextPage: boolean } };
+  variants: { nodes: { id: string; title: string; availableForSale: boolean; price: { amount: string; currencyCode: string } }[]; pageInfo: { hasNextPage: boolean } };
   metafields: ({ key: string; value: string } | null)[];
 };
 export function money(value: { amount: string; currencyCode: string }): Money {
@@ -23,7 +23,7 @@ export function normalizeProduct(raw: ShopifyProduct): Product {
   const variants = raw.variants.nodes.map(v => ({
     id: v.id, title: v.title, availableForSale: v.availableForSale,
     // UI limit, never a stock claim. Shopify validates availability at checkout.
-    available: v.availableForSale ? (v.quantityAvailable && v.quantityAvailable > 0 ? Math.min(99, v.quantityAvailable) : 99) : 0,
+    available: v.availableForSale ? 99 : 0,
     price: money(v.price),
   }));
   const selected = variants.find(v => v.availableForSale) ?? variants[0];
@@ -44,6 +44,6 @@ export function normalizeProduct(raw: ShopifyProduct): Product {
     featuredItem: raw.tags.includes('catch-of-the-week'),
     preparationSuggestions: [], storageInstructions: fields.storage_instructions || null,
     variants, seo: { title: raw.seo.title || raw.title, description: raw.seo.description },
-    supply: { type: 'stocked', label: 'Selección de la casa', notice: null, shortNotice: null, arrivesOn: null, orderBy: null },
+    supply: { type: 'unspecified', label: 'Selección de la casa', notice: null, shortNotice: null, arrivesOn: null, orderBy: null },
   };
 }

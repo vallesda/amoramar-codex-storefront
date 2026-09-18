@@ -21,7 +21,7 @@ export default function OpenCart() {
       <BagIcon />
       <span className="hidden sm:inline">Carrito</span>
       {count > 0 ? (
-        <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1.5 text-xs tabular-nums text-background">
+        <span key={count} className="cart-count-feedback flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1.5 text-xs tabular-nums text-background">
           {count}
         </span>
       ) : null}

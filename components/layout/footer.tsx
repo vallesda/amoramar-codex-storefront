@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-import { getNavCollections } from '@/lib/commerce';
 import Container from '@/components/ui/container';
 import Logo from '@/components/layout/logo';
 import Eyebrow from '@/components/ui/eyebrow';
 import {
   INFO_LINKS,
+  FOOTER_PRODUCT_LINKS,
   INSTAGRAM_URL,
   WHATSAPP_URL,
   WHATSAPP_LABEL,
@@ -32,7 +32,6 @@ import { WhatsAppIcon, InstagramIcon } from '@/components/ui/social-icons';
  * maquetación en vez de como aire.
  */
 export default async function Footer() {
-  const collections = await getNavCollections();
   const year = new Date().getFullYear();
 
   return (
@@ -61,10 +60,9 @@ export default async function Footer() {
           </div>
 
           <FooterColumn title="Productos">
-            <FooterLink href="/search">Todo el catálogo</FooterLink>
-            {collections.map((c) => (
-              <FooterLink key={c.handle} href={`/search/${c.handle}`}>
-                {c.title}
+            {FOOTER_PRODUCT_LINKS.map((link) => (
+              <FooterLink key={link.href} href={link.href}>
+                {link.label}
               </FooterLink>
             ))}
           </FooterColumn>
@@ -106,6 +104,10 @@ export default async function Footer() {
 
         <div className="flex flex-col gap-2 border-t border-background/15 py-6 text-xs text-background/60 md:flex-row md:justify-between">
           <p>© {year} Amor a Mar</p>
+          <nav aria-label="Políticas de la tienda" className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/terminos-y-condiciones" className="py-1 underline underline-offset-4 hover:text-background">Términos y condiciones</Link>
+            <Link href="/envios" className="py-1 underline underline-offset-4 hover:text-background">Política de envíos</Link>
+          </nav>
           <p>Precios en pesos mexicanos (MXN)</p>
         </div>
       </Container>
