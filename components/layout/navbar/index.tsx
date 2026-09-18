@@ -26,7 +26,10 @@ export default async function Navbar() {
             <nav aria-label="Principal" className="hidden lg:block">
               <ul className="flex items-center gap-5 text-sm">
                 {links.map((link) => (
-                  <li key={link.href}>
+                  <li
+                    key={link.href}
+                    className={link.href === '/nosotros' ? 'border-l border-border pl-5' : undefined}
+                  >
                     <Link
                       href={link.href}
                       className="-my-2 inline-block whitespace-nowrap py-2 hover:text-brand"

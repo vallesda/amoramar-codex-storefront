@@ -81,7 +81,10 @@ export default function MobileMenu({
           <nav className="flex-1 overflow-y-auto px-5 py-2">
             <ul className="flex flex-col">
               {links.map((link) => (
-                <li key={link.href} className="border-b border-border">
+                <li
+                  key={link.href}
+                  className={`border-b border-border ${link.href === '/nosotros' ? 'mt-5 border-t pt-2' : ''}`}
+                >
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
