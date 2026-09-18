@@ -9,10 +9,11 @@ export function getPrimaryLinks(collections: Collection[]): NavLink[] {
     { href: '/search', label: 'Catálogo' },
     { href: `/search/${fresh?.handle ?? 'fresco'}`, label: 'Fresco' },
     { href: `/search/${frozen?.handle ?? 'congelados'}`, label: 'Congelado' },
+    ...INFO_LINKS,
   ];
 }
 
-/** Informational links remain available in the footer. */
+/** Shared informational destinations for the navbar and footer. */
 export const INFO_LINKS = [
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/como-funciona', label: 'Cómo funciona' },

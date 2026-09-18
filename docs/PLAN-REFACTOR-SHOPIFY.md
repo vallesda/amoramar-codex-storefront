@@ -84,7 +84,7 @@ Dominio y token Storefront ya configurados localmente. Sigue pendiente revisar p
 
 ## Navegación principal
 
-El navbar de escritorio y móvil muestra únicamente Catálogo, Fresco y Congelado. Las demás categorías siguen accesibles desde el catálogo. Congelado enlaza a la colección `congelados`; Fresco espera una colección publicada con handle `fresco`, `frescos` o `producto-fresco`. Mientras falta, `/search/fresco` presenta un estado vacío sin asignar productos automáticamente. Las páginas informativas siguen en el pie de página.
+El navbar de escritorio y móvil muestra Catálogo, Fresco, Congelado, Nosotros, Cómo funciona y Preguntas frecuentes. Las demás categorías siguen accesibles desde el catálogo. Congelado enlaza a la colección `congelados`; Fresco espera una colección publicada con handle `fresco`, `frescos` o `producto-fresco`. Mientras falta, `/search/fresco` presenta un estado vacío sin asignar productos automáticamente. Las páginas informativas también siguen en el pie de página. Las preguntas frecuentes usan las 13 respuestas proporcionadas por el negocio, sin numeración; el contenido visible y los datos estructurados comparten la misma fuente.
 
 ## Hallazgos del catálogo real
 
