@@ -1,5 +1,6 @@
 import type { Product } from '@/lib/commerce/types';
 import ProductCard from './product-card';
+import DiscoveryGrid from './discovery-grid';
 
 /**
  * One grid, every collection: 2 columns on mobile, 3 from `sm`, 4 from `lg`.
@@ -22,12 +23,12 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   }
 
   return (
-    <ul className="grid grid-cols-2 gap-x-5 gap-y-12 sm:grid-cols-3 md:gap-x-6 lg:grid-cols-4">
+    <DiscoveryGrid>
       {products.map((product) => (
         <li key={product.id}>
           <ProductCard product={product} />
         </li>
       ))}
-    </ul>
+    </DiscoveryGrid>
   );
 }

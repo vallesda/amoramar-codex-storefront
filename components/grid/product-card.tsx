@@ -71,7 +71,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="group relative flex h-full flex-col">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-sand">
+      <div data-discovery-photo className="relative aspect-[4/5] overflow-hidden rounded-sm bg-sand">
         {product.featuredImage ? (
           <Image
             src={product.featuredImage.url}
