@@ -42,3 +42,7 @@ Las pruebas heredadas del checkout/admin anterior no se copiaron porque verifica
 Importar este repositorio como un proyecto nuevo, framework Next.js, raíz del repositorio, `npm ci` y `npm run build`; runtime Node.js 22.x. Configurar las cuatro variables de `.env.example` por entorno. `NEXT_PUBLIC_SITE_URL` debe ser la URL canónica de producción, nunca localhost. Usar tienda de prueba en Preview; mantener protección y noindex hasta completar aceptación. No se ha creado ni desplegado un proyecto remoto.
 
 Fuentes: [Storefront API](https://shopify.dev/docs/api/storefront/2026-07), [Cart API](https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api/cart/manage), [Shopify AI Toolkit](https://shopify.dev/docs/apps/build/ai-toolkit).
+
+## Reporte de entrega
+
+Consulta el [reporte de avance, opciones de pago y próximas fases](docs/REPORTE-AVANCE-Y-PAGOS.md). Incluye el bloqueo actual del checkout y la separación propuesta entre pruebas y producción.

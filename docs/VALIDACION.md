@@ -33,3 +33,7 @@ Las pruebas del checkout del proveedor anterior y de su cliente REST no se trasl
 - Corregidas etiquetas de congelación sin respaldo y enlace de categoría que asumía equivalencia entre productType y handle de colección.
 - Pendiente: compra de extremo a extremo, envíos, impuestos, publicación selectiva de productos auxiliares y metafields. Estas verificaciones no crearon pedidos ni pagos.
 - Validación final: TypeScript, ESLint, 73 pruebas en 13 archivos y build de producción correctos.
+
+## Cierre previo a merge
+
+TypeScript, ESLint y las 73 pruebas vuelven a pasar. Último build de código correcto en `c9b3afd`. Checkout reproducido en navegador: Shopify muestra «Esta tienda todavía no está configurada para recibir pedidos» antes del formulario de pago. Test payment gateway activo según captura del usuario; no hay compra completa verificada. Se requiere comprobar plan/estado de tienda en Admin.
