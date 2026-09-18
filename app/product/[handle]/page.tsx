@@ -7,7 +7,6 @@ import { getProduct, supplyOf, type Product } from '@/lib/commerce';
 import { SHOP_NAME, SITE_URL, breadcrumbJsonLd,
   jsonLdScript,
 } from '@/lib/shop';
-import { slugify } from '@/lib/slug';
 import Gallery from '@/components/product/gallery';
 import ProductDescription from '@/components/product/product-description';
 import ProductDetails from '@/components/product/product-details';
@@ -95,20 +94,6 @@ export default async function Page({ params }: Props) {
           Productos
         </Link>
         <span aria-hidden="true">/</span>
-        {/* The category step is what makes this a trail rather than a back
-            button. A shopper who arrived from a collection can return to it,
-            and one who arrived from search finds it for the first time. */}
-        {product.category ? (
-          <>
-            <Link
-              href={`/search/${slugify(product.category)}`}
-              className="-my-2 py-2 hover:text-brand"
-            >
-              {product.category}
-            </Link>
-            <span aria-hidden="true">/</span>
-          </>
-        ) : null}
         <span className="text-foreground">{product.name}</span>
       </nav>
 
@@ -140,19 +125,6 @@ export default async function Page({ params }: Props) {
     </div>
   );
 }
-
-/**
- * Turns a category name into the handle its collection page answers to.
- *
- * The catalogue returns a display name ("Producto Fresco") and the route wants
- * a slug ("producto-fresco"). Deriving it here rather than adding a field keeps
- * the API contract unchanged; if the admin ever returns the handle directly,
- * this is one function to delete.
- *
- * `normalize('NFD')` plus the combining-marks strip is what makes "Pescados y
- * Mariscos" and an accented category resolve the same way the admin slugged
- * them. An unknown handle still lands on a real 404 rather than an empty grid.
- */
 
 /**
  * Product structured data.

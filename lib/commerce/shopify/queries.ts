@@ -5,7 +5,7 @@ fragment ProductFields on Product {
   featuredImage { url altText }
   images(first: 20) { nodes { url altText } }
   variants(first: 100) {
-    nodes { id title availableForSale quantityAvailable price { amount currencyCode } }
+    nodes { id title availableForSale price { amount currencyCode } }
     pageInfo { hasNextPage }
   }
   metafields(identifiers: [
@@ -92,7 +92,7 @@ query ConnectionCheck @inContext(country: MX, language: ES) {
   products(first: 1) {
     nodes {
       id handle
-      variants(first: 1) { nodes { id availableForSale quantityAvailable price { currencyCode } } }
+      variants(first: 1) { nodes { id availableForSale price { currencyCode } } }
       metafield(namespace: "amoramar", key: "origin") { value }
     }
   }

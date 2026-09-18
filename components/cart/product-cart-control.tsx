@@ -100,8 +100,7 @@ export default function ProductCartControl({
     <>
       <Stepper
         value={quantity}
-        // The stock ceiling, so the grid cannot build a cart the checkout will
-        // reject when it reserves under a row lock.
+        // UI quantity cap. Shopify validates actual availability at checkout.
         max={product.available}
         // One more press below 1 removes the line and returns this slot to
         // "Agregar". Without it the shopper can add from the grid but has to go

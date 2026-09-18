@@ -90,8 +90,8 @@ export default function ProductDescription({ product }: { product: Product }) {
         selectedId={variantId}
         onSelect={(id) => {
           setVariantId(id);
-          // A variant with less stock than the current quantity would otherwise
-          // leave the shopper with a quantity the checkout will reject.
+          // Reset the selector when the new presentation is unavailable.
+          // The numerical cap is a UI limit, not an inventory count.
           const next = product.variants.find((v) => v.id === id);
           if (next && quantity > next.available) {
             setQuantity(Math.max(1, next.available));
@@ -139,20 +139,11 @@ export default function ProductDescription({ product }: { product: Product }) {
             <Stepper
               id="quantity"
               value={quantity}
-              /* Un encargo no tiene existencia que limitar: la tienda compra lo
-                 que se pida. Un tope de cero dejaría el selector muerto en el
-                 único producto que sí se puede pedir siempre. */
-              max={supply.type === 'preorder' ? 99 : available}
+              // Shopify validates the requested quantity when syncing the cart.
+              max={available}
               onChange={setQuantity}
             />
-            {/* Only said when it is nearly true. A running stock number on every
-                product would be scarcity theatre; five or fewer is a fact the
-                shopper needs before choosing a quantity. */}
-            {supply.type !== 'preorder' && available > 0 && available <= 5 ? (
-              <span className="text-sm tabular-nums text-muted">
-                Quedan {available}
-              </span>
-            ) : null}
+
           </div>
         </div>
       ) : null}

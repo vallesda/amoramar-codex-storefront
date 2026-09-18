@@ -46,7 +46,7 @@ export default function Stepper({
   className = '',
 }: {
   value: number;
-  /** Stock ceiling. The control never lets a shopper build a rejected order. */
+  /** UI quantity cap; actual availability is validated by Shopify. */
   max: number;
   onChange: (next: number) => void;
   id?: string;

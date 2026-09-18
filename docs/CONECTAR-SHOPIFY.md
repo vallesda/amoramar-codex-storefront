@@ -3,10 +3,10 @@
 La aplicación usa un token público de Storefront desde el servidor. Este token no es el de Admin API ni el token privado del canal Headless. La conexión del plugin Shopify en Codex tampoco configura automáticamente esta aplicación.
 
 1. Identificar el dominio permanente `nombre.myshopify.com` de la tienda de desarrollo.
-2. En Shopify, configurar el canal Headless y su storefront; obtener su token público de Storefront. Habilitar lectura de productos (`unauthenticated_read_product_listings`) e inventario (`unauthenticated_read_product_inventory`) para las consultas de esta implementación.
+2. En Shopify, configurar el canal Headless y su storefront; obtener su token público de Storefront. Habilitar lectura de productos (`unauthenticated_read_product_listings`). No se necesita el permiso de inventario: la tienda usa `availableForSale` y Shopify valida cantidades en el carrito y al pagar.
 3. Publicar al menos un producto con variantes en ese canal, habilitar su disponibilidad para el mercado México y los precios MXN. Publicar las colecciones que deban aparecer en navegación.
 4. Completar `SHOPIFY_STORE_DOMAIN` y `SHOPIFY_STOREFRONT_ACCESS_TOKEN` en `.env.local`. Mantener `SHOPIFY_API_VERSION=2026-07`. No subir `.env.local` a GitHub ni pegar el token en una conversación.
-5. Ejecutar `npm run shopify:check` con Node 22.18 o superior. Usa `.env.local` y las variables del proceso (estas prevalecen). El comando solo lee: comprueba versión efectiva, permisos del catálogo e inventario, mercado MX/MXN, primer producto y colecciones. Un aviso de metafield no distingue entre un valor vacío y falta de acceso Storefront; revisar ambos en Shopify.
+5. Ejecutar `npm run shopify:check` con Node 22.18 o superior. Usa `.env.local` y las variables del proceso (estas prevalecen). El comando solo lee: comprueba versión efectiva, permisos del catálogo y disponibilidad, mercado MX/MXN, primer producto y colecciones. Un aviso de metafield no distingue entre un valor vacío y falta de acceso Storefront; revisar ambos en Shopify.
 6. Ejecutar `npm run dev`, abrir el catálogo y una ficha. Tras cambiar variables, reiniciar el servidor (o recompilar si se usa `npm run start`). Verificar precio, presentación y disponibilidad contra Shopify.
 7. En tienda de desarrollo, probar dos variantes del mismo producto, cambiar cantidad, quitar un artículo y volver desde checkout sin pagar. El siguiente intento debe reutilizar el carrito. Solo después configurar y probar un pago de prueba, entrega e impuestos.
 
@@ -20,7 +20,7 @@ Pendiente: sincronización al modificar el carrito, conciliación simultánea en
 
 ## Estado de esta entrega
 
-Dominio y credencial reales pendientes. `shopify:check` detectó correctamente la falta de configuración; no hay una conexión real verificada. El `.env.local` creado solo contiene la plantilla, sin credenciales.
+Conexión real verificada con Amor a Mar en México/MXN: productos, variantes, disponibilidad y colecciones accesibles. El catálogo muestra 48 productos. Dominio y token se mantienen en `.env.local`, excluido de Git. El origen del producto de comprobación está vacío o no tiene lectura Storefront. La compra de extremo a extremo sigue pendiente.
 
 Fuentes oficiales:
 - https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api/getting-started

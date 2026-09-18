@@ -13,7 +13,7 @@ npm run dev
 
 Abre http://localhost:3001. Sin credenciales se muestra la marca y un catálogo vacío con aviso de preparación. No se incluyen productos ficticios ni se crean pedidos.
 
-Configura un dominio `*.myshopify.com` y un **token público de Storefront API** generado para el canal Headless. Aunque es público, esta implementación lo mantiene exclusivamente en servidor. No sirve un token de Admin API ni uno privado. Publica productos y colecciones en ese canal, habilita México/MXN y da acceso de lectura a productos, inventario y los metafields documentados. La conexión del plugin de Shopify en Codex es independiente de estas variables de ejecución.
+Configura un dominio `*.myshopify.com` y un **token público de Storefront API** generado para el canal Headless. Aunque es público, esta implementación lo mantiene exclusivamente en servidor. No sirve un token de Admin API ni uno privado. Publica productos y colecciones en ese canal, habilita México/MXN y da acceso de lectura a productos y los metafields documentados. La conexión del plugin de Shopify en Codex es independiente de estas variables de ejecución.
 
 ## Estado
 
@@ -24,7 +24,7 @@ No habilitado: paquetes antiguos, calendario de encargos, cobertura propia, cons
 ## Conectar Shopify (fase 2)
 
 Completa `.env.local` y ejecuta `npm run shopify:check` con Node 22.18+.
-Comprueba token, versión de API, mercado México/MXN, publicación del catálogo y lectura de inventario sin crear carritos ni pedidos. No imprime credenciales. Consulta [la guía de conexión](docs/CONECTAR-SHOPIFY.md).
+Comprueba token, versión de API, mercado México/MXN, publicación del catálogo y disponibilidad sin crear carritos ni pedidos. No imprime credenciales. Consulta [la guía de conexión](docs/CONECTAR-SHOPIFY.md).
 
 ## Validación
 

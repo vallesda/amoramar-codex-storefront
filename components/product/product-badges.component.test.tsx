@@ -97,6 +97,13 @@ describe('cuál etiqueta gana', () => {
 });
 
 describe('lo que es la pieza', () => {
+  it('no inventa condiciones de conservación sin datos', () => {
+    render(<ProductBadges product={product({ supply: supply({ type: 'unspecified' }) })} />);
+
+    expect(screen.queryByText('Fresco')).toBeNull();
+    expect(screen.queryByText('Congelado')).toBeNull();
+  });
+
   it('se muestra también cuando está agotada', () => {
     // Seguirá siendo congelado mañana: no depende de la existencia de hoy.
     render(

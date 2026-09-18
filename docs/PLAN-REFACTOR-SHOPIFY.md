@@ -8,7 +8,7 @@ Una tienda independiente que conserve el branding de Amor a Mar y use Shopify co
 
 ## Avance de integración
 
-Rama `codex/shopify-integration`: configuración validada y comando `npm run shopify:check`; carrito persistente durante el paso al checkout y pruebas de errores/recuperación. Fase 2 **pendiente de acceso a la tienda real**: aún no se proporcionó dominio ni token. No marcar conexión ni compra como verificadas por pasar pruebas con mocks.
+Rama `codex/shopify-integration`: configuración validada y comando `npm run shopify:check`; carrito persistente durante el paso al checkout y pruebas de errores/recuperación. Fase 2 en verificación: conexión real con Amor a Mar confirmada en México/MXN; 48 productos visibles, colecciones y ficha comprobadas en navegador. No se requiere lectura del conteo de inventario. Compra de extremo a extremo pendiente.
 
 ## Auditoría de la base
 
@@ -51,7 +51,7 @@ API fijada en 2026-07, con revisión trimestral. País MX/idioma ES. Se rechazan
 | Pago / descuentos / impuestos | Shopify Checkout | Handoff implementado; configuración real pendiente |
 | Seguimiento de pedidos | Página alojada / Customer Account API | Usar inicialmente Shopify; portal propio posterior |
 
-Metafields deben tener lectura Storefront habilitada. Inventario disponible es una orientación de UI: Shopify revalida al pagar; agregar al carrito no garantiza ni reserva existencias. El tope 99 es de UX, no inventario publicado.
+Metafields deben tener lectura Storefront habilitada. La UI usa `availableForSale` sin mostrar cantidades de inventario: Shopify valida cantidades al sincronizar el carrito y revalida al pagar; agregar al carrito no garantiza ni reserva existencias. El tope 99 es de UX, no inventario publicado.
 
 ## Fases y criterios de salida
 
@@ -80,7 +80,14 @@ Vercel: Next.js, Node 22.x, lockfile y `npm ci`, build estándar. Variables deta
 
 ## Accesos y decisiones pendientes
 
-Se requiere la tienda `*.myshopify.com`, token Storefront en el entorno y acceso para configurar publicaciones, inventario, mercado y entrega. No pegar secretos en el plan. Confirmar paquetes, encargos, política de peso/precio, métodos de entrega y si el admin anterior seguirá operando. El plugin Shopify para gestionar la tienda se ofreció pero su conexión no está confirmada; es independiente del Dev MCP público y del token que utiliza la aplicación.
+Dominio y token Storefront ya configurados localmente. Sigue pendiente revisar publicaciones, metafields y configuración de entrega antes del lanzamiento. No pegar secretos en el plan. Confirmar paquetes, encargos, política de peso/precio, métodos de entrega y si el admin anterior seguirá operando. El plugin Shopify para gestionar la tienda se ofreció pero su conexión no está confirmada; es independiente del Dev MCP público y del token que utiliza la aplicación.
+
+## Hallazgos del catálogo real
+
+- El canal publica productos auxiliares como `store-pickup-app` y `zona-de-envio`; revisar su publicación para el nuevo storefront antes del lanzamiento. No se cambiaron datos de Shopify.
+- El metafield `amoramar.origin` del producto de comprobación está vacío o no tiene lectura Storefront.
+- No se muestran etiquetas Fresco/Congelado sin datos explícitos de conservación.
+- `productType` no es un handle de colección: se retiró el enlace de categoría que generaba rutas inexistentes desde la ficha.
 
 ## Fuentes verificadas
 

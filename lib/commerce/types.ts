@@ -20,11 +20,12 @@ export type ProductVariant = {
   title: string;
   price: Money;
   availableForSale: boolean;
+  /** UI quantity cap; not an inventory count. Shopify validates quantities. */
   available: number;
 };
 
 export type ProductSupply = {
-  type: 'fresh' | 'stocked' | 'preorder';
+  type: 'fresh' | 'stocked' | 'preorder' | 'unspecified';
   label: string;
   notice: string | null;
   shortNotice: string | null;
@@ -80,6 +81,7 @@ export type Product = {
   origin: string | null;
   presentation: string | null;
   availableForSale: boolean;
+  /** UI quantity cap; not an inventory count. Shopify validates quantities. */
   available: number;
 
   featured: boolean;
