@@ -106,6 +106,10 @@ export default async function Footer() {
 
         <div className="flex flex-col gap-2 border-t border-background/15 py-6 text-xs text-background/60 md:flex-row md:justify-between">
           <p>© {year} Amor a Mar</p>
+          <nav aria-label="Políticas de la tienda" className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/terminos-y-condiciones" className="py-1 underline underline-offset-4 hover:text-background">Términos y condiciones</Link>
+            <Link href="/envios" className="py-1 underline underline-offset-4 hover:text-background">Política de envíos</Link>
+          </nav>
           <p>Precios en pesos mexicanos (MXN)</p>
         </div>
       </Container>

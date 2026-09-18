@@ -17,6 +17,7 @@ export default function Checkout() {
         <ul>{cart.lines.map(line => <li key={line.productId} className="flex justify-between gap-4 border-b border-border py-4"><span>{line.quantity} × {line.name}</span><span>{formatMoney({ amountCents: line.quantity * line.unitPrice.amountCents, currency: 'MXN' })}</span></li>)}</ul>
         <p className="my-6 text-xl">Subtotal estimado: {formatMoney({ amountCents: subtotalCents, currency: 'MXN' })}</p>
         <p className="mb-6 text-sm text-muted">El precio final, envío y disponibilidad se confirman al pagar.</p>
+        <p className="mb-6 text-sm text-muted">Consulta nuestros <Link href="/terminos-y-condiciones" className="underline">términos y condiciones</Link> y la <Link href="/envios" className="underline">política de envíos</Link>.</p>
         <input type="hidden" name="lines" value={JSON.stringify(cart.lines.map(l => ({ productId: l.productId, quantity: l.quantity })))} />
         {state.error && <p role="alert" className="mb-5">{state.error}</p>}
         <Button type="submit" disabled={pending}>{pending ? 'Preparando tu pago…' : 'Continuar al pago'}</Button>
