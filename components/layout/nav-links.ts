@@ -34,3 +34,12 @@ export {
   WHATSAPP_URL,
   WHATSAPP_LABEL,
 } from '@/lib/shop';
+
+/** Curated footer only; the full catalog keeps all published collections. */
+export const FOOTER_PRODUCT_LINKS = [
+  { href: '/search', label: 'Todo el catálogo' },
+  { href: '/search/salsas-y-aderezos', label: 'Salsas y Aderezos' },
+  { href: '/search/congelados', label: 'Congelados' },
+  { href: '/search/pescado', label: 'Filetes' },
+  { href: '/search/fresco', label: 'Frescos' },
+] as const;

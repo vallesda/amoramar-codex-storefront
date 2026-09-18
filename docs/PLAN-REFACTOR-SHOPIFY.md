@@ -40,7 +40,7 @@ API fijada en 2026-07, con revisión trimestral. País MX/idioma ES. Se rechazan
 | Categorías | Collections publicadas | Implementado; todas visibles en navegación inicialmente |
 | Destacados | tag `featured` | Implementado |
 | Temporada | tag `seasonal` | Implementado |
-| Pesca semanal | tag `catch-of-the-week` | Implementado; validar que solo haya un producto marcado |
+| Pesca semanal | Primer producto de la colección `mas-vendidos` | Implementado; sigue el mismo orden que la página de la colección |
 | Origen | `amoramar.origin`, texto | Implementado |
 | Presentación descriptiva | `amoramar.presentation`, texto | Implementado |
 | Unidad | `amoramar.unit`: piece/pack/kg/dozen | Implementado; usar unidades comerciales, no peso variable cobrado después |
@@ -85,6 +85,8 @@ Dominio y token Storefront ya configurados localmente. Sigue pendiente revisar p
 ## Navegación principal
 
 El navbar de escritorio y móvil muestra Catálogo, Fresco, Congelado, Nosotros, Cómo funciona y Preguntas frecuentes. Las demás categorías siguen accesibles desde el catálogo. Congelado enlaza a la colección `congelados`; Fresco espera una colección publicada con handle `fresco`, `frescos` o `producto-fresco`. Mientras falta, `/search/fresco` presenta un estado vacío sin asignar productos automáticamente. Las páginas informativas también siguen en el pie de página. Las preguntas frecuentes usan las 13 respuestas proporcionadas por el negocio, sin numeración; el contenido visible y los datos estructurados comparten la misma fuente.
+
+El pie utiliza una lista independiente de enlaces: Todo el catálogo, Salsas y Aderezos, Congelados, Filetes y Frescos. No filtra ni despublica las demás colecciones del catálogo.
 
 ## Hallazgos del catálogo real
 

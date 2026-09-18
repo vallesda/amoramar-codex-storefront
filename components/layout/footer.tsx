@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-import { getNavCollections } from '@/lib/commerce';
 import Container from '@/components/ui/container';
 import Logo from '@/components/layout/logo';
 import Eyebrow from '@/components/ui/eyebrow';
 import {
   INFO_LINKS,
+  FOOTER_PRODUCT_LINKS,
   INSTAGRAM_URL,
   WHATSAPP_URL,
   WHATSAPP_LABEL,
@@ -32,7 +32,6 @@ import { WhatsAppIcon, InstagramIcon } from '@/components/ui/social-icons';
  * maquetación en vez de como aire.
  */
 export default async function Footer() {
-  const collections = await getNavCollections();
   const year = new Date().getFullYear();
 
   return (
@@ -61,10 +60,9 @@ export default async function Footer() {
           </div>
 
           <FooterColumn title="Productos">
-            <FooterLink href="/search">Todo el catálogo</FooterLink>
-            {collections.map((c) => (
-              <FooterLink key={c.handle} href={`/search/${c.handle}`}>
-                {c.title}
+            {FOOTER_PRODUCT_LINKS.map((link) => (
+              <FooterLink key={link.href} href={link.href}>
+                {link.label}
               </FooterLink>
             ))}
           </FooterColumn>
