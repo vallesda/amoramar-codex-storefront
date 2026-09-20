@@ -14,17 +14,18 @@ export default async function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4 md:h-20">
+        <div className="grid min-h-16 grid-cols-[auto_1fr_auto] items-center gap-x-4 md:min-h-20">
           {/* Mobile: menu · logo · cart */}
           <div className="flex items-center gap-1 lg:hidden">
             <MobileMenu links={links} brand={<Logo size={36} />} />
           </div>
 
-          <div className="flex min-w-0 items-center gap-6">
-            <Logo size={36} />
+          <div className="flex min-h-16 min-w-0 items-center justify-center md:min-h-20 lg:col-start-1 lg:row-start-1 lg:justify-start">
+            <Logo size={36} nameClassName="hidden sm:block lg:hidden xl:block" />
+          </div>
 
-            <nav aria-label="Principal" className="hidden lg:block">
-              <ul className="flex items-center gap-5 text-sm">
+            <nav aria-label="Principal" className="hidden lg:col-start-2 lg:row-start-1 lg:block lg:justify-self-center">
+              <ul className="flex items-center justify-center gap-5 text-sm">
                 {links.map((link) => (
                   <li
                     key={link.href}
@@ -40,9 +41,8 @@ export default async function Navbar() {
                 ))}
               </ul>
             </nav>
-          </div>
 
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="col-start-3 row-start-1 flex shrink-0 items-center justify-end gap-2">
             <OpenCart />
           </div>
         </div>

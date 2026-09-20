@@ -30,10 +30,12 @@ import { firstAsset } from '@/lib/assets';
 export default function Logo({
   size = 40,
   withName = true,
+  nameClassName = '',
   variant = 'dark',
 }: {
   size?: number;
   withName?: boolean;
+  nameClassName?: string;
   variant?: 'dark' | 'light';
 }) {
   /*
@@ -90,13 +92,13 @@ export default function Logo({
             width={349}
             height={72}
             priority
-            className={`h-auto w-auto object-contain ${
+            className={`h-auto w-auto object-contain ${nameClassName} ${
               variant === 'light' ? 'brightness-0 invert' : ''
             }`}
             style={{ height: size * 0.62, width: 'auto' }}
           />
         ) : (
-          <span className={`flex flex-col leading-none ${ink}`}>
+          <span className={`flex flex-col leading-none ${ink} ${nameClassName}`}>
             <span className="font-display text-lg tracking-[0.02em]">
               Amor a Mar
             </span>

@@ -12,6 +12,8 @@ import CollectionNav from '@/components/layout/collection-nav';
 import GridSkeleton from '@/components/grid/grid-skeleton';
 import { RHYTHM } from '@/components/ui/section';
 import WaveBackdrop from '@/components/ui/wave-backdrop';
+import ClubIntro, { ClubDetails } from '@/components/merchandising/club-intro';
+import { CLUB_COLLECTION_HANDLE } from '@/components/layout/nav-links';
 
 type Props = { params: Promise<{ collection: string }> };
 
@@ -48,6 +50,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const found = await resolve(handle);
 
   if (!found) return { title: 'Colección no encontrada' };
+
+  if (handle === CLUB_COLLECTION_HANDLE) {
+    return {
+      title: 'Club Amor a Mar — pescado y mariscos cada semana',
+      description: 'Conoce el Club Amor a Mar: productos seleccionados con precios especiales, entregas semanales o recolección en tienda y una forma de consumir con más cuidado.',
+      alternates: { canonical: `/search/${handle}` },
+    };
+  }
 
   return {
     title: `${found.title} en ${LOCALITY}`,
@@ -103,17 +113,22 @@ export default async function Page({ params }: Props) {
       <WaveBackdrop />
 
       <Container className={`relative z-10 ${RHYTHM.sm}`}>
-        <SectionHeader as="h1" title={found.title} className="mb-10" />
+        {handle === CLUB_COLLECTION_HANDLE ? (
+          <ClubIntro />
+        ) : <SectionHeader as="h1" title={found.title} className="mb-10" />}
 
-        <div className="mb-10">
+        {handle !== CLUB_COLLECTION_HANDLE ? <div className="mb-10">
           <Suspense fallback={null}>
             <CollectionNav active={handle} />
           </Suspense>
-        </div>
+        </div> : null}
 
-        <Suspense key={handle} fallback={<GridSkeleton />}>
-          <CollectionProducts handle={handle} />
-        </Suspense>
+        <div id={handle === CLUB_COLLECTION_HANDLE ? 'productos-club' : undefined} className="scroll-mt-36">
+          <Suspense key={handle} fallback={<GridSkeleton />}>
+            <CollectionProducts handle={handle} />
+          </Suspense>
+        </div>
+        {handle === CLUB_COLLECTION_HANDLE ? <ClubDetails /> : null}
       </Container>
     </div>
   );
@@ -135,8 +150,8 @@ async function CollectionProducts({ handle }: { handle: string }) {
 
   return (
     <div>
-      <ResultRule total={total} />
-      <ProductGrid products={items} />
+      {handle !== CLUB_COLLECTION_HANDLE ? <ResultRule total={total} /> : null}
+      <ProductGrid products={items} centered={handle === CLUB_COLLECTION_HANDLE} />
     </div>
   );
 }

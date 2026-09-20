@@ -1,6 +1,7 @@
 import type { Collection } from '@/lib/commerce/types';
 
 export type NavLink = { href: string; label: string };
+export const CLUB_COLLECTION_HANDLE = 'charcuteria-y-anejados';
 
 export function getPrimaryLinks(collections: Collection[]): NavLink[] {
   const fresh = collections.find(c => /^(fresco|frescos|producto-fresco)$/.test(c.handle));
@@ -9,6 +10,7 @@ export function getPrimaryLinks(collections: Collection[]): NavLink[] {
     { href: '/search', label: 'Catálogo' },
     { href: `/search/${fresh?.handle ?? 'fresco'}`, label: 'Fresco' },
     { href: `/search/${frozen?.handle ?? 'congelados'}`, label: 'Congelado' },
+    { href: `/search/${CLUB_COLLECTION_HANDLE}`, label: 'Club AmorAmar' },
     ...INFO_LINKS,
   ];
 }

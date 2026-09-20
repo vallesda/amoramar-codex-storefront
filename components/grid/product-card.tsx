@@ -135,10 +135,10 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Collapses when the admin has filled in neither field. The old
             fallback rendered a non-breaking space, so an incomplete card showed
             a blank line and read as broken rather than simply shorter. */}
-        {meta || product.unit ? (
+        {meta || (product.unit && product.unit !== 'piece') ? (
           <div className="mt-1 flex items-baseline justify-between gap-3 text-xs text-muted">
             <p className="min-w-0">{meta}</p>
-            {product.unit ? (
+            {product.unit && product.unit !== 'piece' ? (
               <span className="shrink-0 tabular-nums">
                 / {formatUnit(product.unit)}
               </span>

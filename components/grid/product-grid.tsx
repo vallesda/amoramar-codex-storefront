@@ -13,7 +13,7 @@ import DiscoveryGrid from './discovery-grid';
  * did not ask for; the extra air is what keeps a card reading as one object
  * with a line under it rather than as a row in a ledger.
  */
-export default function ProductGrid({ products }: { products: Product[] }) {
+export default function ProductGrid({ products, centered = false }: { products: Product[]; centered?: boolean }) {
   if (products.length === 0) {
     return (
       <p className="border-t border-border py-12 text-center text-muted">
@@ -23,9 +23,9 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   }
 
   return (
-    <DiscoveryGrid>
+    <DiscoveryGrid centered={centered}>
       {products.map((product) => (
-        <li key={product.id}>
+        <li key={product.id} className={centered ? 'w-[calc((100%-1.25rem)/2)] sm:w-[calc((100%-2.5rem)/3)] md:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-4.5rem)/4)]' : undefined}>
           <ProductCard product={product} />
         </li>
       ))}

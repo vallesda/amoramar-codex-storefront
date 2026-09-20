@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
 /** Enhance server-rendered cards; photos remain visible without JavaScript. */
-export default function DiscoveryGrid({ children }: { children: ReactNode }) {
+export default function DiscoveryGrid({ children, centered = false }: { children: ReactNode; centered?: boolean }) {
   const ref = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -44,5 +44,5 @@ export default function DiscoveryGrid({ children }: { children: ReactNode }) {
     };
   }, [children]);
 
-  return <ul ref={ref} className="grid grid-cols-2 gap-x-5 gap-y-12 sm:grid-cols-3 md:gap-x-6 lg:grid-cols-4">{children}</ul>;
+  return <ul ref={ref} className={centered ? 'flex flex-wrap justify-center gap-x-5 gap-y-12 md:gap-x-6' : 'grid grid-cols-2 gap-x-5 gap-y-12 sm:grid-cols-3 md:gap-x-6 lg:grid-cols-4'}>{children}</ul>;
 }

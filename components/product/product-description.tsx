@@ -80,7 +80,8 @@ export default function ProductDescription({ product }: { product: Product }) {
       </div>
 
       <p className="font-sans text-3xl">
-        <Price value={price} unit={product.unit} />
+        <Price value={price} unit={product.unit === 'piece' ? undefined : product.unit} />
+        {product.unit === 'piece' ? <span className="price-unit text-muted"> mx</span> : null}
       </p>
 
       <SpecList specs={specs} />

@@ -6,3 +6,6 @@ node_modules/
 *.tsbuildinfo
 .DS_Store
 coverage/
+
+# Generated catalog workbooks, image batches, and review artifacts.
+outputs/
